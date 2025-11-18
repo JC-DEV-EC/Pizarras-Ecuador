@@ -1298,7 +1298,17 @@ export default function Home() {
           </div>
           
           <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-[#5C5C5E] text-sm">&copy; 2025 Pizarras Ecuador. Todos los derechos reservados.</p>
+            <p className="text-[#5C5C5E] text-sm">
+              &copy; 2025 Pizarras Ecuador. Todos los derechos reservados.{" "}
+              <a 
+                href="https://jc-dev-ec.netlify.app/" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-[#E1B261] transition"
+              >
+                JC-DEV-EC
+              </a>
+            </p>
             <div className="flex items-center gap-2 text-[#5C5C5E] text-sm">
               <span>Hecho con</span>
               <Icons.heart className="w-4 h-4 text-red-500 animate-pulse" />
