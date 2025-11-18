@@ -1,0 +1,547 @@
+@import "tailwindcss";
+
+:root {
+  --background: #1A1A1C;
+  --foreground: #FFFFFF;
+  --accent-gold: #E1B261;
+  --accent-gold-dark: #CBA058;
+  --dark-bg: #171719;
+  --dark-card: #222224;
+  --text-gray: #A7A7A7;
+  --text-muted: #5C5C5E;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  scroll-behavior: smooth;
+}
+
+/* Custom Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 5s ease infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.8) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
+
+.animate-in {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* Glassmorphism */
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Liquid Glass Effects */
+.liquid-glass {
+  background: linear-gradient(
+    135deg,
+    rgba(225, 178, 97, 0.1) 0%,
+    rgba(203, 160, 88, 0.05) 50%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(225, 178, 97, 0.2);
+  box-shadow: 
+    0 8px 32px 0 rgba(0, 0, 0, 0.37),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.liquid-glass::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(225, 178, 97, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.liquid-glass:hover::before {
+  left: 100%;
+}
+
+/* Liquid Glass Dark */
+.liquid-glass-dark {
+  background: linear-gradient(
+    135deg,
+    rgba(23, 23, 25, 0.8) 0%,
+    rgba(26, 26, 28, 0.6) 50%,
+    rgba(34, 34, 36, 0.8) 100%
+  );
+  backdrop-filter: blur(25px) saturate(150%);
+  -webkit-backdrop-filter: blur(25px) saturate(150%);
+  border: 1px solid rgba(225, 178, 97, 0.3);
+  box-shadow: 
+    0 12px 48px 0 rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 0 rgba(225, 178, 97, 0.1),
+    inset 0 -1px 0 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Liquid Glass Gold */
+.liquid-glass-gold {
+  background: linear-gradient(
+    135deg,
+    rgba(225, 178, 97, 0.25) 0%,
+    rgba(203, 160, 88, 0.15) 50%,
+    rgba(225, 178, 97, 0.2) 100%
+  );
+  backdrop-filter: blur(30px) saturate(200%) brightness(120%);
+  -webkit-backdrop-filter: blur(30px) saturate(200%) brightness(120%);
+  border: 1px solid rgba(225, 178, 97, 0.4);
+  box-shadow: 
+    0 15px 60px 0 rgba(225, 178, 97, 0.3),
+    inset 0 2px 0 0 rgba(255, 255, 255, 0.2),
+    inset 0 -2px 0 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Frosted Glass */
+.frosted-glass {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(15px) brightness(110%);
+  -webkit-backdrop-filter: blur(15px) brightness(110%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Glow effect for glass */
+@keyframes glow {
+  0%, 100% {
+    box-shadow: 
+      0 0 20px rgba(225, 178, 97, 0.3),
+      0 0 40px rgba(225, 178, 97, 0.2),
+      inset 0 0 20px rgba(225, 178, 97, 0.1);
+  }
+  50% {
+    box-shadow: 
+      0 0 30px rgba(225, 178, 97, 0.5),
+      0 0 60px rgba(225, 178, 97, 0.3),
+      inset 0 0 30px rgba(225, 178, 97, 0.15);
+  }
+}
+
+.glass-glow {
+  animation: glow 3s ease-in-out infinite;
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: linear-gradient(135deg, #E1B261 0%, #CBA058 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Card hover effect */
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Animated underline */
+.animated-underline {
+  position: relative;
+}
+
+.animated-underline::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background: linear-gradient(90deg, #E1B261 0%, #CBA058 100%);
+  transition: width 0.3s ease;
+}
+
+.animated-underline:hover::after {
+  width: 100%;
+}
+
+/* Infinite Horizontal Scroll */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll 30s linear infinite;
+}
+
+.animate-scroll:hover {
+  animation-play-state: paused;
+}
+
+/* Loader animations - Bars */
+.bars-loader {
+  position: relative;
+  display: block;
+  margin: auto;
+  padding: 0;
+  width: 150px;
+  height: 50px;
+  text-align: center;
+}
+
+.bar {
+  position: relative;
+  display: inline-block;
+  margin: 0 8px;
+  width: 10px;
+  height: 50px;
+  border-radius: 0px;
+  background: linear-gradient(180deg, #E1B261 0%, #CBA058 100%);
+  box-shadow: 0 4px 10px rgba(225, 178, 97, 0.3);
+  animation: swing infinite 5s cubic-bezier(0.955, -0.01, 1, 1);
+  transform-origin: 100% 100%;
+}
+
+.bar::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  bottom: 0;
+  display: block;
+  width: 10px;
+  height: 10px;
+  background: transparent;
+  box-shadow: 0 4px rgba(203, 160, 88, 0.3);
+  animation: extend infinite 5s cubic-bezier(0.955, -0.01, 1, 1);
+  opacity: 0;
+  transform-origin: 0% 0%;
+}
+
+.bar:nth-child(2),
+.bar:nth-child(2)::before {
+  animation-delay: 0.3s;
+}
+
+.bar:nth-child(3),
+.bar:nth-child(3)::before {
+  animation-delay: 0.6s;
+}
+
+.bar:nth-child(4),
+.bar:nth-child(4)::before {
+  animation-delay: 0.9s;
+}
+
+.bar:nth-child(5),
+.bar:nth-child(5)::before {
+  animation-delay: 1.2s;
+}
+
+.bar:last-of-type {
+  animation-name: swing-last;
+}
+
+.bar:last-of-type::before {
+  animation-name: extend-last;
+}
+
+@keyframes swing {
+  10% {
+    transform: rotate(70deg);
+  }
+  60% {
+    transform: rotate(70deg);
+  }
+  70% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes swing-last {
+  10% {
+    transform: rotate(90deg);
+  }
+  60% {
+    transform: rotate(90deg);
+  }
+  70% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes extend {
+  10% {
+    transform: rotate(-70deg);
+    width: 20px;
+    opacity: 1;
+    left: 0px;
+    bottom: -1px;
+  }
+  60% {
+    transform: rotate(-70deg);
+    width: 20px;
+    opacity: 1;
+  }
+  70% {
+    width: 10px;
+    transform: rotate(0deg);
+    opacity: 0;
+  }
+}
+
+@keyframes extend-last {
+  10% {
+    transform: rotate(-90deg);
+    width: 20px;
+    height: 2px;
+    opacity: 0.5;
+    left: 3px;
+    bottom: -1px;
+  }
+  60% {
+    transform: rotate(-90deg);
+    width: 20px;
+    height: 2px;
+    opacity: 0.5;
+  }
+  70% {
+    transform: rotate(0deg);
+    width: 10px;
+    height: 10px;
+    opacity: 0;
+  }
+}
+
+/* Vertical scroll for promo images */
+@keyframes scroll-vertical {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+.animate-scroll-vertical {
+  animation: scroll-vertical 30s linear infinite;
+}
+
+.animate-scroll-vertical:hover {
+  animation-play-state: paused;
+}
+
+/* Chalk writing effect - Sequential (writes once) */
+@keyframes chalk-write-sequential {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  100% {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+.chalk-text-sequential {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0;
+  opacity: 0;
+  animation: chalk-write-sequential 2s ease-out forwards;
+  position: relative;
+}
+
+.chalk-text-sequential::after {
+  content: '';
+  position: absolute;
+  right: -2px;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: #E1B261;
+  opacity: 0;
+  animation: cursor-blink 0.7s steps(2) 2s 3, cursor-fade-out 0.3s 4s forwards;
+}
+
+@keyframes cursor-blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
+
+@keyframes cursor-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+.chalk-dust {
+  position: relative;
+}
+
+.chalk-dust::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(225, 178, 97, 0.3) 0%, transparent 70%);
+  filter: blur(8px);
+  opacity: 0;
+  animation: dust-appear 2s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes dust-appear {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+}
+
+/* Handwriting effect */
+@keyframes handwrite {
+  0% {
+    width: 0;
+    opacity: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  100% {
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+@keyframes chalk-move-single-line {
+  0% {
+    left: 0;
+    opacity: 0;
+  }
+  2% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 1;
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+.handwriting-text {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0;
+  opacity: 0;
+  animation: handwrite 3s ease-in-out forwards;
+  position: relative;
+}
+
+.writing-chalk {
+  position: absolute;
+  pointer-events: none;
+  z-index: 100;
+  top: 10px;
+  left: 0;
+  transform: rotate(-15deg);
+  filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5)) drop-shadow(0 0 10px rgba(255,255,255,0.3));
+  animation: chalk-move-single-line 5s linear forwards;
+}
